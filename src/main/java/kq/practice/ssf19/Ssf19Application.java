@@ -1,16 +1,13 @@
 package kq.practice.ssf19;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.InputStream;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,6 +16,7 @@ import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
+import kq.practice.ssf19.model.Bag;
 import kq.practice.ssf19.model.Employee;
 import kq.practice.ssf19.repository.EmployeeRepo;
 
@@ -27,6 +25,10 @@ public class Ssf19Application implements CommandLineRunner {
 
 	@Autowired
 	EmployeeRepo repo;
+
+	@Autowired
+	@Qualifier("totebag")
+	Bag bag;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Ssf19Application.class, args);
@@ -62,6 +64,10 @@ public class Ssf19Application implements CommandLineRunner {
 		// System.out.println(repo.getRecord(12345).getId());
 
 		// System.out.println(repo.getAll());
+
+		// ==========================================================================
+
+		bag.showBagType();
 	}
 
 	private Employee parseEmpObject(JsonObject emp) {
